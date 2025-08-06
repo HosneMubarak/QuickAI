@@ -1,9 +1,36 @@
+import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { BASE_URL } from "../utils/constant";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password1: "",
+    password2: "",
+  });
+  const handleFormChnage = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        BASE_URL + "/auth/registration/",
+        formData,
+        { withCredentials: true }
+      );
+      console.log(response);
+      if (response.status == 201) {
+        navigate("/login");
+      }
+    } catch (error) {}
+  };
   return (
     <>
       <Navbar />
@@ -13,45 +40,55 @@ const SignUp = () => {
             <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">
               Sign up to QuickAI
             </h2>
-            <form>
+            <form onSubmit={handleSignUp}>
               <input
                 id="first_name"
+                name="first_name"
                 className="w-full bg-transparent border mb-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
                 type="text"
                 placeholder="First Name"
+                onChange={handleFormChnage}
                 required
               />
               <input
                 id="last_name"
+                name="last_name"
                 className="w-full bg-transparent border mb-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
                 type="text"
                 placeholder="Last Name"
+                onChange={handleFormChnage}
                 required
               />
               <input
                 id="email"
+                name="email"
                 className="w-full bg-transparent border mb-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
                 type="email"
                 placeholder="Email"
+                onChange={handleFormChnage}
                 required
               />
               <input
                 id="password1"
+                name="password1"
                 className="w-full bg-transparent border mb-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
                 type="password"
                 placeholder="Password"
+                onChange={handleFormChnage}
                 required
               />
               <input
                 id="password2"
+                name="password2"
                 className="w-full bg-transparent border mb-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
                 type="password"
                 placeholder="Confirm Password"
+                onChange={handleFormChnage}
                 required
               />
               <button
                 type="submit"
-                className="w-full mt-2 mb-3 bg-indigo-500 py-2.5 rounded-full text-white"
+                className="w-full mt-2 mb-3 bg-indigo-500 py-2.5 rounded-full text-white cursor-pointer"
               >
                 Sign up
               </button>

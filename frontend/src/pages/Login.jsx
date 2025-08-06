@@ -1,9 +1,33 @@
+import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-
+import { BASE_URL } from "../utils/constant";
 const Login = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleFormChnage = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(BASE_URL + "/auth/login/", formData, {
+        withCredentials: true,
+      });
+      console.log(response.data);
+      if (response.status == 200) {
+        navigate("/ai");
+      }
+    } catch (error) {}
+  };
+
   return (
     <>
       <Navbar />
@@ -13,19 +37,23 @@ const Login = () => {
             <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">
               Sign in to QuickAI
             </h2>
-            <form>
+            <form onSubmit={handleSubmit}>
               <input
                 id="email"
                 className="w-full bg-transparent border my-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
                 type="email"
+                name="email"
                 placeholder="Enter your email"
+                onChange={handleFormChnage}
                 required
               />
               <input
                 id="password"
                 className="w-full bg-transparent border mt-1 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
                 type="password"
+                name="password"
                 placeholder="Enter your password"
+                onChange={handleFormChnage}
                 required
               />
               <div className="text-right py-4">
@@ -38,7 +66,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="w-full mb-3 bg-indigo-500 py-2.5 rounded-full text-white"
+                className="w-full mb-3 bg-indigo-500 py-2.5 rounded-full text-white cursor-pointer"
               >
                 Log in
               </button>
