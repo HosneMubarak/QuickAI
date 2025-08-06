@@ -4,17 +4,23 @@ import BackgroundRemoval from "./pages/BackgroundRemoval";
 import BlogTitleGenerator from "./pages/BlogTitleGenerator";
 import Community from "./pages/Community";
 import Dashboard from "./pages/Dashboard";
+import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import ImageGeneration from "./pages/ImageGeneration";
 import Layout from "./pages/Layout";
+import Login from "./pages/Login";
 import ObjectRemoval from "./pages/ObjectRemoval";
 import ResumeReviewer from "./pages/ResumeReviewer";
+import SignUp from "./pages/SignUp";
 
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/ai" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="write-article" element={<ArticleWriter />} />

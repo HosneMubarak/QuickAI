@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
-const Login = () => {
+const SignUp = () => {
   const navigate = useNavigate();
   return (
     <>
@@ -11,46 +11,59 @@ const Login = () => {
         <div className="text-center mt-6">
           <div className="bg-white text-gray-500 max-w-96 mx-4 md:p-6 p-4 text-left text-sm rounded-xl shadow-[0px_0px_10px_0px] shadow-black/10">
             <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">
-              Sign in to QuickAI
+              Sign up to QuickAI
             </h2>
             <form>
               <input
-                id="email"
-                className="w-full bg-transparent border my-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
-                type="email"
-                placeholder="Enter your email"
+                id="first_name"
+                className="w-full bg-transparent border mb-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
+                type="text"
+                placeholder="First Name"
                 required
               />
               <input
-                id="password"
-                className="w-full bg-transparent border mt-1 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
-                type="password"
-                placeholder="Enter your password"
+                id="last_name"
+                className="w-full bg-transparent border mb-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
+                type="text"
+                placeholder="Last Name"
                 required
               />
-              <div className="text-right py-4">
-                <button
-                  className="text-blue-600 underline cursor-pointer"
-                  onClick={() => navigate("/forgot-password")}
-                >
-                  Forgot Password
-                </button>
-              </div>
+              <input
+                id="email"
+                className="w-full bg-transparent border mb-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
+                type="email"
+                placeholder="Email"
+                required
+              />
+              <input
+                id="password1"
+                className="w-full bg-transparent border mb-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
+                type="password"
+                placeholder="Password"
+                required
+              />
+              <input
+                id="password2"
+                className="w-full bg-transparent border mb-3 border-gray-500/30 outline-none rounded-full py-2.5 px-4"
+                type="password"
+                placeholder="Confirm Password"
+                required
+              />
               <button
                 type="submit"
-                className="w-full mb-3 bg-indigo-500 py-2.5 rounded-full text-white"
+                className="w-full mt-2 mb-3 bg-indigo-500 py-2.5 rounded-full text-white"
               >
-                Log in
+                Sign up
               </button>
             </form>
             <p className="text-center mt-4">
-              Don’t have an account?{" "}
+              Already have an account?{" "}
               <button
                 type="button"
                 className="text-blue-500 underline cursor-pointer"
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/login")}
               >
-                Signup
+                Log in
               </button>
             </p>
             <button
@@ -62,7 +75,7 @@ const Login = () => {
                 src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/login/googleFavicon.png"
                 alt="googleFavicon"
               />
-              Log in with Google
+              Sign up with Google
             </button>
           </div>
         </div>
@@ -72,4 +85,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
