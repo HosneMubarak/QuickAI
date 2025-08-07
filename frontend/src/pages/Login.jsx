@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { BASE_URL } from "../utils/constant";
+import { setUser } from "../utils/userSlice";
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,6 +26,7 @@ const Login = () => {
       });
       console.log(response.data);
       if (response.status == 200) {
+        dispatch(setUser(response.data.user));
         navigate("/ai");
       }
     } catch (error) {}

@@ -1,12 +1,9 @@
-import { Outlet } from "react-router";
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router";
 
 const Layout = () => {
-  return (
-    <div>
-      <h1>Layout</h1>
-      <Outlet />
-    </div>
-  );
+  const { isAuthenticated } = useSelector((store) => store.user);
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default Layout;
